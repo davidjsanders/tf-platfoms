@@ -1,0 +1,45 @@
+[jumpbox]
+k8s-jumpbox ansible_host=${jumpbox}
+
+[master]
+k8s-master ansible_host=${master}
+
+[masters]
+k8s-master ansible_host=${master}
+${masters}
+
+[workers]
+${workers}
+
+[all:vars]
+admin="${admin}"
+ansible_ssh_user=${admin}
+ansible_ssh_private_key_file=${ansible_ssh_private_key_file}
+ansible_ssh_common_args='-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null'
+ansible_python_interpreter=/usr/bin/python3
+auth_file="${auth_file}"
+domain="${domain}"
+email="${email}"
+helm_service_account_name="${helm_service_account_name}"
+master="${master}"
+master_name="${master_name}"
+masters="${masters}
+nexus_username="${nexus_username}"
+nexus_password="${nexus_password}"
+os_k8s_version="${os_k8s_version}"
+postgres_db="${postgres_db}"
+postgres_user="${postgres_user}"
+postgres_password="${postgres_password}"
+postgres_endpoint="${postgres_endpoint}"
+postgres_port="${postgres_port}"
+prod_staging_flag="${prod_staging_flag}"
+registry="${registry}"
+workers="${workers}"
+KUBEADM_API="${kubeadm_api}"
+KUBEADM_API_VERSION="${kubeadm_api_version}"
+KUBEADM_API_ADVERTISE_IP="${kubeadm_api_advertise_ip}"
+KUBEADM_CERT_DIR="${kubeadm_cert_dir}"
+KUBEADM_CLUSTER_NAME="${kubeadm_cluster_name}"
+KUBEADM_POD_SUBNET="${kubeadm_pod_subnet}"
+KUBEADM_SERVICE_SUBNET="${kubeadm_service_subnet}"
+KUBEADM_K8S_VERSION="${kubeadm_k8s_version}"

@@ -46,11 +46,6 @@ resource "null_resource" "provisioner" {
   }
 
   provisioner "file" {
-    source      = "ansible/k8s-playbook"
-    destination = "/home/${var.vm-adminuser}/playbooks"
-  }
-
-  provisioner "file" {
     content     = data.template_file.template-hosts-file.rendered
     destination = "/home/${var.vm-adminuser}/hosts"
   }

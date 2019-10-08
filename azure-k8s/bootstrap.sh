@@ -22,17 +22,21 @@ sudo DEBIAN_FRONTEND=noninteractive apt-get -o Dpkg::Options::="--force-confold"
 echo
 echo "apt-add-repository ansible/ansible"
 echo
-sudo DEBIAN_FRONTEND=noninteractive apt-add-repository --yes ppa:ansible/ansible
+sudo DEBIAN_FRONTEND=noninteractive \
+    apt-add-repository --yes ppa:ansible/ansible
 
 echo
 echo "apt-get update"
 echo
-sudo DEBIAN_FRONTEND=noninteractive apt-get -o Dpkg::Options::="--force-confold" -q update
+sudo DEBIAN_FRONTEND=noninteractive \
+    apt-get -o Dpkg::Options::="--force-confold" -q update
 
 echo
 echo "apt-get install ansible"
 echo
-sudo DEBIAN_FRONTEND=noninteractive apt-get -o Dpkg::Options::="--force-confold" -q --yes install ansible
+sudo DEBIAN_FRONTEND=noninteractive \
+    apt-get -o Dpkg::Options::="--force-confold" -q --yes \
+    install ansible
 echo 'Done.'
 
 echo
