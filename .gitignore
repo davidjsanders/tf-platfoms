@@ -1,0 +1,20 @@
+#  Local .terraform directories
+**/.terraform/*
+**/targets/*.secret
+**/targets/*-run
+**/targets/beconf.tfvars
+azure-k8s-bare/targets/*.tfvars
+**/.DS_Store
+**/*.old
+**/*.json
+**/*.tpl
+**/*.ini
+**/.vagrant
+**/.terraform
+**/*.retry
+**/*.log
+**/auth
+
+# .tfstate files
+*.tfstate
+*.tfstate.*
