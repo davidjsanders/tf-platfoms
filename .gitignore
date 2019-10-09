@@ -13,6 +13,7 @@ azure-k8s-bare/targets/*.tfvars
 **/.terraform
 **/*.retry
 **/*.log
+**/*.out
 **/auth
 
 # .tfstate files
