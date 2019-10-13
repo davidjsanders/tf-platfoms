@@ -3,7 +3,7 @@ ifndef WORKDIR
 endif
 
 ifndef IMAGE_NAME
-  override IMAGE_NAME="dsanderscan/docker-terraform:19.10.33"
+  override IMAGE_NAME := "dsanderscan/docker-terraform:19.10.33"
 endif
 
 ifndef ENVIRONMENT

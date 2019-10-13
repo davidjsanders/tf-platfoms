@@ -73,7 +73,7 @@ resource "null_resource" "provisioner" {
 
   provisioner "local-exec" {
     command = format(
-      "echo 'DDNS: %s --> *.%s'; curl -X POST 'https://%s:%s@domains.google.com/nic/update?hostname=%s&myip=%s&offline=no'; echo",
+      "echo 'DDNS: %s --> *%s'; curl -X POST 'https://%s:%s@domains.google.com/nic/update?hostname=*%s&myip=%s&offline=no'; echo",
       azurerm_public_ip.k8s-pip-lb.ip_address,
       var.ddns_domain_name,
       var.wild_username,
@@ -109,7 +109,7 @@ resource "null_resource" "provisioner" {
 
   provisioner "local-exec" {
     command = format(
-      "echo 'DDNS: %s --> *.%s'; curl -X POST 'https://%s:%s@domains.google.com/nic/update?hostname=%s&myip=%s&offline=yes'; echo",
+      "echo 'DDNS: %s --> *%s'; curl -X POST 'https://%s:%s@domains.google.com/nic/update?hostname=*%s&myip=%s&offline=yes'; echo",
       azurerm_public_ip.k8s-pip-lb.ip_address,
       var.ddns_domain_name,
       var.wild_username,
