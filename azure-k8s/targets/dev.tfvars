@@ -51,7 +51,7 @@ prod_staging_flag = "prod"
 # New VM variables
 #
 workers = {
-    vm-count    = 2
+    vm-count    = 1
     prefix      = "k8s-worker"
     vm-size     = "Standard_DS3_v2"
     publisher   = "Canonical"
@@ -72,7 +72,6 @@ masters = {
     delete_os   = true
     delete_data = false
 }
-#/subscriptions/54dd1e30-b249-43a1-a46e-9a1c40dff2cc/resourceGroups/RG-ENGINEERING/providers/Microsoft.Compute/images/img-K8S-UBUNTU-1804-19-10-2
 jumpboxes = {
     vm-count    = 1
     prefix      = "k8s-jumpbox"
