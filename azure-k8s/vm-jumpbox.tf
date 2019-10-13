@@ -17,19 +17,22 @@
 # -------------------------------------------------------------------
 
 resource "azurerm_virtual_machine" "vm-jumpbox" {
+  count = var.jumpboxes.vm-count
+
   availability_set_id              = ""
   delete_os_disk_on_termination    = "true"
   delete_data_disks_on_termination = "true"
   location                         = var.location
   name = upper(
     format(
-      "VM-JUMP-%s-%s%s", 
+      "VM-JUMP-%s-%02d-%s%s", 
       var.target, 
+      count.index + 1,
       var.environ, 
       local.l-random
       )
   )
-  network_interface_ids = [azurerm_network_interface.k8s-nic-jumpbox.id]
+  network_interface_ids = [azurerm_network_interface.k8s-nic-jumpbox.*.id[count.index]]
   resource_group_name   = azurerm_resource_group.k8s-rg.name
   vm_size               = var.jumpbox-vm-size
 
@@ -39,10 +42,12 @@ resource "azurerm_virtual_machine" "vm-jumpbox" {
   }
 
   storage_image_reference {
-    publisher = "Canonical"
-    offer     = "UbuntuServer"
-    sku       = "18.04-LTS"
-    version   = "latest"
+    id = format(
+      "/subscriptions/%s/resourceGroups/%s/providers/Microsoft.Compute/images/%s",
+      var.subscription_id,
+      var.jumpboxes.image-rg,
+      var.jumpboxes.image-id
+    )
   }
 
   storage_os_disk {

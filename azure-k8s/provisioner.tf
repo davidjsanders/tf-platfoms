@@ -17,14 +17,13 @@
 
 resource "null_resource" "provisioner" {
   triggers = {
-    vm_jumpbox_id      = azurerm_virtual_machine.vm-jumpbox.id
     vm_k8s_master_1_id = azurerm_virtual_machine.vm-master.id
-    vm_k8s_worker_1_id = azurerm_virtual_machine.vm-workers[0].id
-    vm_k8s_worker_2_id = azurerm_virtual_machine.vm-workers[1].id
+    jumpboxes = "${join(",", azurerm_virtual_machine.vm-jumpbox.*.id)}"
+    workers = "${join(",", azurerm_virtual_machine.vm-workers.*.id)}"
   }
 
   connection {
-    host        = azurerm_public_ip.k8s-pip-jump.ip_address
+    host        = azurerm_public_ip.k8s-pip-jump.*.ip_address[0]
     type        = "ssh"
     user        = var.vm-adminuser
     private_key = file(local.l_pk_file)
@@ -61,11 +60,29 @@ resource "null_resource" "provisioner" {
   }
 
   provisioner "local-exec" {
-    command = "echo 'DDNS: ${azurerm_public_ip.k8s-pip-jump.ip_address} --> *.${var.jumpbox_domain_name}'; curl -X POST 'https://${var.jumpbox_username}:${var.jumpbox_password}@domains.google.com/nic/update?hostname=${var.jumpbox_domain_name}&myip=${azurerm_public_ip.k8s-pip-jump.ip_address}&offline=no'; echo"
+    command = format(
+      "echo 'DDNS: %s --> *.%s'; curl -X POST 'https://%s:%s@domains.google.com/nic/update?hostname=%s&myip=%s&offline=no'; echo",
+      azurerm_public_ip.k8s-pip-jump.*.ip_address[0],
+      var.jumpbox_domain_name,
+      var.jumpbox_username,
+      var.jumpbox_password,
+      var.jumpbox_domain_name,
+      azurerm_public_ip.k8s-pip-jump.*.ip_address[0]
+    )
   }
 
   provisioner "local-exec" {
-    command = "echo 'DDNS: ${azurerm_public_ip.k8s-pip-lb.ip_address} --> *.${var.ddns_domain_name}'; curl -X POST 'https://${var.wild_username}:${var.wild_password}@domains.google.com/nic/update?hostname=*${var.ddns_domain_name}&myip=${azurerm_public_ip.k8s-pip-lb.ip_address}&offline=no'; echo"
+    command = format(
+      "echo 'DDNS: %s --> *.%s'; curl -X POST 'https://%s:%s@domains.google.com/nic/update?hostname=%s&myip=%s&offline=no'; echo",
+      azurerm_public_ip.k8s-pip-lb.ip_address,
+      var.ddns_domain_name,
+      var.wild_username,
+      var.wild_password,
+      var.ddns_domain_name,
+      azurerm_public_ip.k8s-pip-lb.ip_address
+    )
+    # command = "echo 'DDNS: ${} 
+    # --> *.${}'; curl -X POST 'https://${}:${}@domains.google.com/nic/update?hostname=*${}&myip=${}&offline=no'; echo"
   }
 
   provisioner "remote-exec" {
@@ -77,12 +94,30 @@ resource "null_resource" "provisioner" {
   }
 
   provisioner "local-exec" {
-    command = "echo 'DDNS: ${azurerm_public_ip.k8s-pip-lb.ip_address} /-> *.${var.ddns_domain_name}'; curl -X POST 'https://${var.wild_username}:${var.wild_password}@domains.google.com/nic/update?hostname=*${var.ddns_domain_name}&myip=0.0.0.0&offline=yes'; echo"
+    command = format(
+      "echo 'DDNS: %s --> *.%s'; curl -X POST 'https://%s:%s@domains.google.com/nic/update?hostname=%s&myip=%s&offline=yes'; echo",
+      azurerm_public_ip.k8s-pip-jump.*.ip_address[0],
+      var.jumpbox_domain_name,
+      var.jumpbox_username,
+      var.jumpbox_password,
+      var.jumpbox_domain_name,
+      "0.0.0.0"
+    )
+    # command = "echo 'DDNS: ${azurerm_public_ip.k8s-pip-lb.ip_address} /-> *.${var.ddns_domain_name}'; curl -X POST 'https://${var.wild_username}:${var.wild_password}@domains.google.com/nic/update?hostname=*${var.ddns_domain_name}&myip=0.0.0.0&offline=yes'; echo"
     when    = destroy
   }
 
   provisioner "local-exec" {
-    command = "echo 'DDNS: ${azurerm_public_ip.k8s-pip-jump.ip_address} /-> *.${var.jumpbox_domain_name}'; curl -X POST 'https://${var.jumpbox_username}:${var.jumpbox_password}@domains.google.com/nic/update?hostname=${var.jumpbox_domain_name}&myip=0.0.0.0&offline=yes'; echo"
+    command = format(
+      "echo 'DDNS: %s --> *.%s'; curl -X POST 'https://%s:%s@domains.google.com/nic/update?hostname=%s&myip=%s&offline=yes'; echo",
+      azurerm_public_ip.k8s-pip-lb.ip_address,
+      var.ddns_domain_name,
+      var.wild_username,
+      var.wild_password,
+      var.ddns_domain_name,
+      "0.0.0.0"
+    )
+    # command = "echo 'DDNS: ${azurerm_public_ip.k8s-pip-jump.ip_address} /-> *.${var.jumpbox_domain_name}'; curl -X POST 'https://${var.jumpbox_username}:${var.jumpbox_password}@domains.google.com/nic/update?hostname=${var.jumpbox_domain_name}&myip=0.0.0.0&offline=yes'; echo"
     when    = destroy
   }
 }

@@ -17,9 +17,12 @@
 # -------------------------------------------------------------------
 
 resource "azurerm_network_interface" "k8s-nic-jumpbox" {
+  count = var.jumpboxes.vm-count
+
   location = var.location
   name = format(
-    "NIC-JUMPBOX-%s-%s%s",
+    "NIC-JUMPBOX-%02d-%s-%s%s",
+    count.index + 1,
     var.target,
     var.environ,
     local.l-random,
@@ -28,7 +31,8 @@ resource "azurerm_network_interface" "k8s-nic-jumpbox" {
 
   ip_configuration {
     name = format(
-      "NIC-JUMPBOX-IPCONFIG-%s-%s%s",
+      "NIC-JUMPBOX-IPCONFIG-%02d-%s-%s%s",
+      count.index,
       var.target,
       var.environ,
       local.l-random,
@@ -37,7 +41,7 @@ resource "azurerm_network_interface" "k8s-nic-jumpbox" {
     private_ip_address = cidrhost(
       azurerm_subnet.k8s-subnet-jumpbox.address_prefix,
       5)
-    public_ip_address_id          = azurerm_public_ip.k8s-pip-jump.id
+    public_ip_address_id          = azurerm_public_ip.k8s-pip-jump.*.id[count.index]
     subnet_id                     = azurerm_subnet.k8s-subnet-jumpbox.id
   }
 

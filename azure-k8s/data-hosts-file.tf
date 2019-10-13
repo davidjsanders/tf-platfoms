@@ -14,21 +14,31 @@
 # -------------------------------------------------------------------
 # 10 Sep 2019  | David Sanders               | First release.
 # -------------------------------------------------------------------
+# 13 Oct 2019  | David Sanders               | Change jumpboxes to
+#              |                             | list of items.
+# -------------------------------------------------------------------
 
 # Compute and interpolate the variables required for the hosts file
 data "template_file" "template-hosts-file" {
   template = file("template-data/hosts")
 
   vars = {
-    jumpbox = format(
-      "%s    %s",
-      azurerm_network_interface.k8s-nic-jumpbox.private_ip_address,
-      "jumpbox"
-    )
     master  = format(
       "%s    %s",
       azurerm_network_interface.k8s-nic-master.private_ip_address,
       "k8s-master"
+    )
+    jumpboxes = join(
+      "\n",
+      [
+        for i in range(0, var.jumpboxes.vm-count) : 
+          format(
+            "%s    %s-%01d",
+            azurerm_network_interface.k8s-nic-jumpbox.*.private_ip_address[i],
+            var.jumpboxes.prefix,
+            i+1
+          )
+      ]
     )
     workers = join(
       "\n",

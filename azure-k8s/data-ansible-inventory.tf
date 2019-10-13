@@ -44,7 +44,19 @@ data "template_file" "template-ansible-inventory" {
     )
     domain                       = var.ddns_domain_name
     email                        = var.email
-    jumpbox                      = azurerm_network_interface.k8s-nic-jumpbox.private_ip_address
+    jumpboxes = join(
+      "\n",
+      [
+        for i in range(0, var.jumpboxes.vm-count) : 
+          format(
+            "%s-%01d    ansible_host=%s",
+            var.jumpboxes.prefix,
+            i+1,
+            azurerm_network_interface.k8s-nic-jumpbox.*.private_ip_address[i]
+          )
+      ]
+    )
+#    jumpbox                      = azurerm_network_interface.k8s-nic-jumpbox.private_ip_address
     helm_service_account_name    = var.helm_service_account_name
     kubeadm_api                  = var.kubeadm_api
     kubeadm_api_version          = var.kubeadm_api_version

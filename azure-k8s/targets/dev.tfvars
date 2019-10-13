@@ -70,6 +70,16 @@ masters = {
     sku         = "18.04-LTS"
     version     = "latest"
     delete_os   = true
+    delete_data = false
+}
+#/subscriptions/54dd1e30-b249-43a1-a46e-9a1c40dff2cc/resourceGroups/RG-ENGINEERING/providers/Microsoft.Compute/images/img-K8S-UBUNTU-1804-19-10-2
+jumpboxes = {
+    vm-count    = 1
+    prefix      = "k8s-jumpbox"
+    vm-size     = "Standard_DS1_v2"
+    image-id    = "K8S-UBUNTU-1804-19-10-3"
+    image-rg    = "RG-ENGINEERING"
+    delete_os   = true
     delete_data = true
 }
 
