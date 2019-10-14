@@ -20,15 +20,20 @@
 
 resource "azurerm_virtual_machine" "vm-master" {
   availability_set_id              = azurerm_availability_set.k8s-avset-mgr.id
-  delete_os_disk_on_termination    = "true"
-  delete_data_disks_on_termination = "false"
+  delete_os_disk_on_termination    = var.masters.delete_os
+  delete_data_disks_on_termination = var.masters.delete_data
   location                         = var.location
   name = upper(
-    format("VM-MTR-1-%s-%s%s", var.target, var.environ, local.l-random),
+    format(
+      "VM-MTR-1-%s-%s%s", 
+      var.target, 
+      var.environ, 
+      local.l-random
+    ),
   )
   network_interface_ids = [azurerm_network_interface.k8s-nic-master.id]
   resource_group_name   = azurerm_resource_group.k8s-rg.name
-  vm_size               = var.master-vm-size
+  vm_size               = var.masters.vm-size
 
   boot_diagnostics {
     storage_uri = azurerm_storage_account.k8s-sa-boot-diag.primary_blob_endpoint
@@ -36,10 +41,12 @@ resource "azurerm_virtual_machine" "vm-master" {
   }
 
   storage_image_reference {
-    publisher = "Canonical"
-    offer     = "UbuntuServer"
-    sku       = "18.04-LTS"
-    version   = "latest"
+    id = format(
+      "/subscriptions/%s/resourceGroups/%s/providers/Microsoft.Compute/images/%s",
+      var.subscription_id,
+      var.masters.image-rg,
+      var.masters.image-id
+    )
   }
 
   storage_os_disk {
@@ -61,7 +68,7 @@ resource "azurerm_virtual_machine" "vm-master" {
     computer_name = upper(
       format(
         "%s",
-        var.vm-master-name
+        var.masters.prefix
       ),
     )
     admin_username = var.vm-adminuser

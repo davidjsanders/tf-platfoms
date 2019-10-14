@@ -16,7 +16,7 @@
 # -------------------------------------------------------------------
 
 resource "azurerm_public_ip" "k8s-pip-jump" {
-  count = var.jumpboxes.vm-count
+  count = local.l_jumpboxes_vm_count
 
   allocation_method = "Static"
   location          = var.location

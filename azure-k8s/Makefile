@@ -10,7 +10,23 @@ ifndef ENVIRONMENT
   override ENVIRONMENT=dev
 endif
 
-.PHONY: init
+.PHONY: taint
+taint:
+	@start="`date`"; \
+	docker run \
+		--rm -it \
+		--volume $(WORKDIR):/data \
+		--volume $(WORKDIR)/targets:/secrets \
+		--volume $(HOME)/.ssh/:/ssh/ \
+		$(IMAGE_NAME) \
+			taint null_resource.provisioner ; \
+	echo ; \
+	echo "Started taint at  : $$start"; \
+	echo "Finished taint at : `date`"; \
+	echo
+
+.PHONY: init plan apply destroy
+
 init:
 	@start="`date`"; \
 	docker run \
@@ -25,7 +41,6 @@ init:
 	echo "Finished init at : `date`"; \
 	echo
 
-.PHONY: plan
 plan:
 	@start="`date`"; \
 	docker run \
@@ -44,7 +59,6 @@ plan:
 	echo "Finished plan at : `date`"; \
 	echo
 
-.PHONY: apply
 apply:
 	@start="`date`"; \
 	docker run \
@@ -61,7 +75,6 @@ apply:
 	echo "Finished apply at : `date`"; \
 	echo
 
-.PHONY: destroy
 destroy:
 	@start="`date`"; \
 	docker run \

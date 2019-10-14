@@ -47,7 +47,7 @@ data "template_file" "template-ansible-inventory" {
     jumpboxes = join(
       "\n",
       [
-        for i in range(0, var.jumpboxes.vm-count) : 
+        for i in range(0, local.l_jumpboxes_vm_count) : 
           format(
             "%s-%01d    ansible_host=%s",
             var.jumpboxes.prefix,
@@ -82,7 +82,7 @@ data "template_file" "template-ansible-inventory" {
     workers = join(
       "\n",
       [
-        for i in range(0, var.workers.vm-count) : 
+        for i in range(0, local.l_workers_vm_count) : 
           format(
             "%s-%01d    ansible_host=%s",
             var.workers.prefix,
