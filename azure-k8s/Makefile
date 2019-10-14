@@ -25,7 +25,8 @@ taint:
 	echo "Finished taint at : `date`"; \
 	echo
 
-.PHONY: init
+.PHONY: init plan apply destroy
+
 init:
 	@start="`date`"; \
 	docker run \
@@ -40,7 +41,6 @@ init:
 	echo "Finished init at : `date`"; \
 	echo
 
-.PHONY: plan
 plan:
 	@start="`date`"; \
 	docker run \
@@ -59,7 +59,6 @@ plan:
 	echo "Finished plan at : `date`"; \
 	echo
 
-.PHONY: apply
 apply:
 	@start="`date`"; \
 	docker run \
@@ -76,7 +75,6 @@ apply:
 	echo "Finished apply at : `date`"; \
 	echo
 
-.PHONY: destroy
 destroy:
 	@start="`date`"; \
 	docker run \
