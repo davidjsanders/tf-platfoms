@@ -63,6 +63,17 @@ variable "masters" {
     delete_data = true
   }
 }
+variable "jumpboxes" {
+  default = {
+    vm-count    = 1
+    prefix      = "k8s-jumpbox"
+    vm-size     = "Standard_DS1_v2"
+    image-id    = "img-K8S-UBUNTU-1804-19-10-2"
+    image-rg    = "RG-ENGINEERING"
+    delete_os   = true
+    delete_data = true
+  }
+}
 
 # Nexus Variables
 variable "nexus_username" {}

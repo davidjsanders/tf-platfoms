@@ -50,6 +50,7 @@ prod_staging_flag = "prod"
 #
 # New VM variables
 #
+# vm-count for workers needs to be a minimum of 2
 workers = {
     vm-count    = 2
     prefix      = "k8s-worker"
@@ -69,6 +70,15 @@ masters = {
     offer       = "UbuntuServer"
     sku         = "18.04-LTS"
     version     = "latest"
+    delete_os   = true
+    delete_data = false
+}
+jumpboxes = {
+    vm-count    = 1
+    prefix      = "k8s-jumpbox"
+    vm-size     = "Standard_DS1_v2"
+    image-id    = "K8S-UBUNTU-1804-19-10-3"
+    image-rg    = "RG-ENGINEERING"
     delete_os   = true
     delete_data = true
 }

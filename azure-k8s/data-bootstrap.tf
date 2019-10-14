@@ -19,39 +19,18 @@
 # -------------------------------------------------------------------
 
 # Compute and interpolate the variables required for the hosts file
-data "template_file" "template-hosts-file" {
-  template = file("template-data/hosts")
+data "template_file" "template-bootstrap" {
+  template = file("bootstrap.sh")
 
   vars = {
-    master  = format(
-      "%s    %s",
-      azurerm_network_interface.k8s-nic-master.private_ip_address,
-      "k8s-master"
-    )
-    jumpboxes = join(
-      "\n",
-      [
-        for i in range(0, var.jumpboxes.vm-count) : 
-          format(
-            "%s    %s-%01d",
-            azurerm_network_interface.k8s-nic-jumpbox.*.private_ip_address[i],
-            var.jumpboxes.prefix,
-            i+1
-          )
-      ]
-    )
-    workers = join(
-      "\n",
-      [
-        for i in range(0, var.workers.vm-count) : 
-          format(
-            "%s    %s-%01d",
-            azurerm_network_interface.k8s-nic-workers.*.private_ip_address[i],
-            var.workers.prefix,
-            i+1
-          )
-      ]
-    )
+    jumpbox_user        = var.jumpbox_username
+    jumpbox_password    = var.jumpbox_password
+    jumpbox_domain_name = var.jumpbox_domain_name
+    jumpbox_ip_address  = azurerm_public_ip.k8s-pip-jump.*.ip_address[0]
+    wild_user           = var.wild_username
+    wild_password       = var.wild_password
+    wild_domain_name    = var.ddns_domain_name
+    wild_ip_address     = azurerm_public_ip.k8s-pip-lb.ip_address
   }
 }
 

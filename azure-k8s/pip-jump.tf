@@ -16,11 +16,14 @@
 # -------------------------------------------------------------------
 
 resource "azurerm_public_ip" "k8s-pip-jump" {
+  count = var.jumpboxes.vm-count
+
   allocation_method = "Static"
   location          = var.location
   name = format(
-    "PIP-%s-JUMP-%s-%s%s",
+    "PIP-%s-JUMP-%02d-%s-%s%s",
     var.vnet-name,
+    count.index + 1,
     var.target,
     var.environ,
     local.l-random,
@@ -30,4 +33,3 @@ resource "azurerm_public_ip" "k8s-pip-jump" {
 
   tags = var.tags
 }
-

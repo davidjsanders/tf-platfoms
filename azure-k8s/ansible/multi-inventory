@@ -1,5 +1,5 @@
 [jumpbox]
-k8s-jumpbox ansible_host=${jumpbox}
+${jumpboxes}
 
 [master]
 k8s-master ansible_host=${master}
