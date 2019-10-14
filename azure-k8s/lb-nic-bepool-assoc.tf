@@ -21,7 +21,7 @@
 # -------------------------------------------------------------------
 
 resource "azurerm_network_interface_backend_address_pool_association" "lb-assoc-worker-1" {
-  count = var.workers.vm-count
+  count = var.workers.vm-count < 2 ? 2 : var.workers.vm-count
 
   network_interface_id    = azurerm_network_interface.k8s-nic-workers[count.index].id
   backend_address_pool_id = azurerm_lb_backend_address_pool.k8s-lb-bepool.id

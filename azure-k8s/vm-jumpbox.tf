@@ -17,7 +17,7 @@
 # -------------------------------------------------------------------
 
 resource "azurerm_virtual_machine" "vm-jumpbox" {
-  count = var.jumpboxes.vm-count
+  count = var.jumpboxes.vm-count < 1 ? 1 : var.jumpboxes.vm-count
 
   availability_set_id              = ""
   delete_os_disk_on_termination    = "true"

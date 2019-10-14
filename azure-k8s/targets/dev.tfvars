@@ -10,37 +10,6 @@
 # Creator email:  dsanderscanada@nospam-gmail.com
 #
 # -------------------------------------------------------------------
-# Modifed On   | Modified By                 | Release Notes
-# -------------------------------------------------------------------
-# 22 Aug 2018  | David Sanders               | First release and
-#                                            | valid creation of
-#                                            | sample app.
-# -------------------------------------------------------------------
-# 14 Jul 2019  | David Sanders               | Update vars
-# -------------------------------------------------------------------
-# 26 Aug 2019  | David Sanders               | Add DDNS creds
-# -------------------------------------------------------------------
-# 08 Sep 2019  | David Sanders               | Ported to ansible
-#              |                             | module.
-# -------------------------------------------------------------------
-# 19 Sep 2019  | David Sanders               | Add letsencrypt
-#              |                             | vars.
-# -------------------------------------------------------------------
-# 23 Sep 2019  | David Sanders               | Add map vars for
-#              |                             | workers.
-# -------------------------------------------------------------------
-# 23 Sep 2019  | David Sanders               | Add new k8s vars for
-#              |                             | kubeadm.
-#              |                             | Add vm prefix.
-#              |                             | Removed secrets from
-#              |                             | tfvars to enable config
-#              |                             | to reside on GitHub.
-# -------------------------------------------------------------------
-# 01 Oct 2019  | David Sanders               | Add prod_staging_flag
-#              |                             | to indicate production
-#              |                             | or staging Let's
-#              |                             | Encrypt server.
-# -------------------------------------------------------------------
 
 #
 # Prod or staging?
@@ -50,15 +19,31 @@ prod_staging_flag = "prod"
 #
 # New VM variables
 #
+
+#
+# VM
+#
+vm-jumpbox-name = "k8s-jumpbox"
+vm-master-name = "k8s-master"
+master-vm-size = "Standard_DS2_v2"
+worker-vm-size = "Standard_DS3_v2"
+jumpbox-vm-size = "Standard_DS1_v2"
+image-name = "img-ubuntu"
+image-version = "1-0-26-u"
+image-rg = "RG-ENGINEERING"
+private-key = "/ssh/azure-pk"
+delete-osdisk-on-termination = true
+delete-datadisk-on-termination = false
+vm-disable-password-auth = true
+vm-osdisk-type = "Premium_LRS"
+
 # vm-count for workers needs to be a minimum of 2
 workers = {
-    vm-count    = 2
+    vm-count    = 1
     prefix      = "k8s-worker"
     vm-size     = "Standard_DS3_v2"
-    publisher   = "Canonical"
-    offer       = "UbuntuServer"
-    sku         = "18.04-LTS"
-    version     = "latest"
+    image-id    = "K8S-UBUNTU-1804-19-10-3"
+    image-rg    = "RG-ENGINEERING"
     delete_os   = true
     delete_data = true
 }
@@ -66,15 +51,13 @@ masters = {
     vm-count    = 1
     prefix      = "k8s-master"
     vm-size     = "Standard_DS2_v2"
-    publisher   = "Canonical"
-    offer       = "UbuntuServer"
-    sku         = "18.04-LTS"
-    version     = "latest"
+    image-id    = "K8S-UBUNTU-1804-19-10-3"
+    image-rg    = "RG-ENGINEERING"
     delete_os   = true
     delete_data = false
 }
 jumpboxes = {
-    vm-count    = 1
+    vm-count    = 0
     prefix      = "k8s-jumpbox"
     vm-size     = "Standard_DS1_v2"
     image-id    = "K8S-UBUNTU-1804-19-10-3"
@@ -184,23 +167,6 @@ nsg-rules-workers = [
     }
 ]
 
-
-#
-# VM
-#
-vm-jumpbox-name = "k8s-jumpbox"
-vm-master-name = "k8s-master"
-master-vm-size = "Standard_DS2_v2"
-worker-vm-size = "Standard_DS3_v2"
-jumpbox-vm-size = "Standard_DS1_v2"
-image-name = "img-ubuntu"
-image-version = "1-0-26-u"
-image-rg = "RG-ENGINEERING"
-private-key = "/ssh/azure-pk"
-delete-osdisk-on-termination = true
-delete-datadisk-on-termination = false
-vm-disable-password-auth = true
-vm-osdisk-type = "Premium_LRS"
 
 #
 # Helm

@@ -17,7 +17,7 @@
 # -------------------------------------------------------------------
 
 resource "azurerm_network_interface" "k8s-nic-jumpbox" {
-  count = var.jumpboxes.vm-count
+  count = var.jumpboxes.vm-count < 1 ? 1 : var.jumpboxes.vm-count
 
   location = var.location
   name = format(

@@ -21,7 +21,7 @@
 # -------------------------------------------------------------------
 
 resource "azurerm_network_interface" "k8s-nic-workers" {
-  count = var.workers.vm-count
+  count = var.workers.vm-count < 2 ? 2 : var.workers.vm-count
 
   location = var.location
   name = format(

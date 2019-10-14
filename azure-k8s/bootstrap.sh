@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 echo
+echo "Setting up jumpbox. ${notification_text}"
+echo
+
+echo
 echo "Set permissions on SSH keys"
 echo
 chmod 0600 ~/.ssh/config ~/.ssh/azure_pk

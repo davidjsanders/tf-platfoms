@@ -21,7 +21,7 @@
 # -------------------------------------------------------------------
 
 resource "azurerm_virtual_machine" "vm-workers" {
-  count = var.workers.vm-count
+  count = var.workers.vm-count < 2 ? 2 : var.workers.vm-count
 
   availability_set_id              = azurerm_availability_set.k8s-avset-wrk.id
   delete_os_disk_on_termination    = var.workers.delete_os
@@ -47,10 +47,12 @@ resource "azurerm_virtual_machine" "vm-workers" {
   }
 
   storage_image_reference {
-    publisher = var.workers.publisher
-    offer     = var.workers.offer
-    sku       = var.workers.sku
-    version   = var.workers.version
+    id = format(
+      "/subscriptions/%s/resourceGroups/%s/providers/Microsoft.Compute/images/%s",
+      var.subscription_id,
+      var.workers.image-rg,
+      var.workers.image-id
+    )
   }
 
   storage_os_disk {

@@ -26,7 +26,7 @@ data "template_file" "template-hosts-file" {
     master  = format(
       "%s    %s",
       azurerm_network_interface.k8s-nic-master.private_ip_address,
-      "k8s-master"
+      var.masters.prefix
     )
     jumpboxes = join(
       "\n",
