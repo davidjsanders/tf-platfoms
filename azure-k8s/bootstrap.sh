@@ -4,15 +4,13 @@ echo "Bootstrapping kubernetes cluster: ${notification_text}"
 echo "If this configuration is not correct (or desired because"
 echo "of minimum requirements) you have 10 seconds to press"
 echo "^c (control c)."
-bold=$(tput bold)
-normal=$(tput sgr0)
-echo -n "${bold}"
-for i in `seq 10 1`
-do 
-    echo -n "$i..."
-    sleep 1
-done
-echo "proceeding${normal}"
+bold=`tput bold`
+normal=`tput sgr0`
+echo ""
+echo "Sleeping $${bold}10 seconds$${normal} to allow control-c to cancel"
+echo
+sleep 10
+echo "proceeding"
 echo
 
 echo

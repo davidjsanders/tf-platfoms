@@ -38,6 +38,7 @@ vm-disable-password-auth = true
 vm-osdisk-type = "Premium_LRS"
 
 # vm-count for workers needs to be a minimum of 2
+# and is enforced in the tf locals script (locals.tf)
 workers = {
     vm-count    = 1
     prefix      = "k8s-worker"
@@ -47,6 +48,7 @@ workers = {
     delete_os   = true
     delete_data = true
 }
+
 masters = {
     vm-count    = 1
     prefix      = "k8s-master"
@@ -56,6 +58,9 @@ masters = {
     delete_os   = true
     delete_data = false
 }
+
+# vm-count for jumpboxes needs to be a minimum of 1
+# and is enforced in the tf locals script (locals.tf)
 jumpboxes = {
     vm-count    = 0
     prefix      = "k8s-jumpbox"

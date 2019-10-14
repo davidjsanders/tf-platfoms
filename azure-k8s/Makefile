@@ -10,6 +10,21 @@ ifndef ENVIRONMENT
   override ENVIRONMENT=dev
 endif
 
+.PHONY: taint
+taint:
+	@start="`date`"; \
+	docker run \
+		--rm -it \
+		--volume $(WORKDIR):/data \
+		--volume $(WORKDIR)/targets:/secrets \
+		--volume $(HOME)/.ssh/:/ssh/ \
+		$(IMAGE_NAME) \
+			taint null_resource.provisioner ; \
+	echo ; \
+	echo "Started taint at  : $$start"; \
+	echo "Finished taint at : `date`"; \
+	echo
+
 .PHONY: init
 init:
 	@start="`date`"; \
