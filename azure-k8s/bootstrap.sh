@@ -36,8 +36,12 @@ url_string="$${url_string}&offline=no"
 curl -X POST $${url_string}
 
 echo
-echo "Done. **NOTE** It may take up to two minutes for Dynamic DNS"
-echo "               changes to be applied. Please wait before"
-echo "               ssh-ing to the jumpbox or accessing the load-"
-echo "               balancer."
+echo "Download and execute Ansible playbook"
+echo
+git clone https://github.com/dgsd-consulting/ansible-playbooks.git
+cd ansible-playbooks/k8s-playbook/
+ansible-playbook playbook.yml
+
+echo
+echo "Done."
 echo
