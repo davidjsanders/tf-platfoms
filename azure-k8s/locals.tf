@@ -21,5 +21,8 @@ locals {
   l-dev        = ""
   l-dev-lower  = ""
   l_pk_file    = format("%s", var.private-key)
+  l_masters_vm_count = 1
+  l_workers_vm_count = var.workers.vm-count < 2 ? 2 : var.workers.vm-count
+  l_jumpboxes_vm_count = var.jumpboxes.vm-count < 1 ? 1 : var.jumpboxes.vm-count
 }
 

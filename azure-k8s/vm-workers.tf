@@ -21,7 +21,7 @@
 # -------------------------------------------------------------------
 
 resource "azurerm_virtual_machine" "vm-workers" {
-  count = var.workers.vm-count < 2 ? 2 : var.workers.vm-count
+  count = local.l_workers_vm_count
 
   availability_set_id              = azurerm_availability_set.k8s-avset-wrk.id
   delete_os_disk_on_termination    = var.workers.delete_os

@@ -31,7 +31,7 @@ data "template_file" "template-hosts-file" {
     jumpboxes = join(
       "\n",
       [
-        for i in range(0, var.jumpboxes.vm-count) : 
+        for i in range(0, local.l_jumpboxes_vm_count) : 
           format(
             "%s    %s-%01d",
             azurerm_network_interface.k8s-nic-jumpbox.*.private_ip_address[i],
