@@ -50,8 +50,9 @@ prod_staging_flag = "prod"
 #
 # New VM variables
 #
+# vm-count for workers needs to be a minimum of 2
 workers = {
-    vm-count    = 1
+    vm-count    = 2
     prefix      = "k8s-worker"
     vm-size     = "Standard_DS3_v2"
     publisher   = "Canonical"
