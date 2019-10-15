@@ -31,7 +31,6 @@ jumpbox-vm-size = "Standard_DS1_v2"
 image-name = "img-ubuntu"
 image-version = "1-0-26-u"
 image-rg = "RG-ENGINEERING"
-private-key = "/ssh/azure-pk"
 delete-osdisk-on-termination = true
 delete-datadisk-on-termination = false
 vm-disable-password-auth = true

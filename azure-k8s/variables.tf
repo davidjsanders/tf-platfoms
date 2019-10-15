@@ -332,6 +332,9 @@ variable "jumpbox-vm-size" {
 variable "private-key" {
 }
 
+variable "private-key-pub" {
+}
+
 variable "delete-osdisk-on-termination" {
 }
 

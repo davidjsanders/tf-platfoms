@@ -29,7 +29,7 @@ resource "null_resource" "provisioner" {
     host        = azurerm_public_ip.k8s-pip-jump.*.ip_address[0]
     type        = "ssh"
     user        = var.vm-adminuser
-    private_key = file(local.l_pk_file)
+    private_key = var.private-key
   }
 
   provisioner "file" {

@@ -81,7 +81,7 @@ resource "azurerm_virtual_machine" "vm-master" {
 
     ssh_keys {
       path     = "/home/${var.vm-adminuser}/.ssh/authorized_keys"
-      key_data = file(format("%s.pub", var.private-key))
+      key_data = var.private-key-pub
     }
   }
 
