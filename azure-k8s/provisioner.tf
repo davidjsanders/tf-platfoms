@@ -33,12 +33,12 @@ resource "null_resource" "provisioner" {
   }
 
   provisioner "file" {
-    source      = var.private-key
+    content      = var.private-key
     destination = "/home/${var.vm-adminuser}/.ssh/azure_pk"
   }
 
   provisioner "file" {
-    source      = "${var.private-key}.pub"
+    content      = "var.private-key-pub"
     destination = "/home/${var.vm-adminuser}/.ssh/azure_pk.pub"
   }
 
