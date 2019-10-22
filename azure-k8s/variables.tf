@@ -37,6 +37,10 @@ variable "prod_staging_flag" {
   default = "staging"
 }
 
+variable "environment_flag" {
+  default = "dev"
+}
+
 variable "workers" {
   default = {
     vm-count    = 2

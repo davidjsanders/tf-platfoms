@@ -15,6 +15,7 @@
 # Prod or staging?
 #
 prod_staging_flag = "prod"
+environment_flag = "dev"
 
 #
 # New VM variables
