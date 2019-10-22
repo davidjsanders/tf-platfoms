@@ -17,6 +17,15 @@
 prod_staging_flag = "prod"
 
 #
+# Environment flag; if set to dev, will append a random integer
+# to each resource name; if set to blue, will append 'blue' to
+# each resource name; if set to green, will apeend 'green' to each
+# each resource name; if set to prod, will not append to the
+# resource name.
+#
+environment_flag = "dev"
+
+#
 # New VM variables
 #
 

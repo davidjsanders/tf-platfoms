@@ -19,6 +19,10 @@
 resource "azurerm_virtual_machine" "vm-jumpbox" {
   count = local.l_jumpboxes_vm_count
 
+  depends_on = [
+    "azurerm_network_interface.k8s-nic-jumpbox"
+  ]
+
   availability_set_id              = ""
   delete_os_disk_on_termination    = "true"
   delete_data_disks_on_termination = "true"

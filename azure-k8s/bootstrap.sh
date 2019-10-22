@@ -55,6 +55,11 @@ echo
 git clone https://github.com/dgsd-consulting/ansible-playbooks.git
 cd ansible-playbooks/k8s-playbook/
 ansible-playbook playbook.yml
+ret_stat="$?"
+if [ "$ret_stat" != "0" ]
+then
+    exit $ret_stat
+fi
 
 echo
 echo "Done."

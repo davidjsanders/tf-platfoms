@@ -23,6 +23,10 @@
 resource "azurerm_virtual_machine" "vm-workers" {
   count = local.l_workers_vm_count
 
+  depends_on = [
+    "azurerm_network_interface.k8s-nic-workers"
+  ]
+
   availability_set_id              = azurerm_availability_set.k8s-avset-wrk.id
   delete_os_disk_on_termination    = var.workers.delete_os
   delete_data_disks_on_termination = var.workers.delete_data
