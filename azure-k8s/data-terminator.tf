@@ -6,7 +6,7 @@ data "template_file" "template-terminator" {
     workers = join(
       "\n",
       [
-        for i in range(0, var.workers.vm-count) : 
+        for i in range(0, local.l_workers_vm_count) : 
           format(
             "%s-%s",
             var.workers.prefix,

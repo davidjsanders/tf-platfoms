@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 echo
-echo "Draining and removing kubernetes worker nodes not in: ${workers}"
+echo "Draining and removing kubernetes worker nodes not in: "
+echo "------------------------------------------------------"
+echo "${workers}"
+echo "------------------------------------------------------"
 echo
 workers="${workers}"
 oldworkers="$(kubectl get nodes -o json | jq -r '.items[].metadata.labels | select(.role == "worker") ' | jq -r '."kubernetes.io/hostname"')"
