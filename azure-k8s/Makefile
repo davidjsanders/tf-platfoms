@@ -10,7 +10,8 @@ ifndef ENVIRONMENT
   override ENVIRONMENT=dev
 endif
 
-.PHONY: taint
+.PHONY: init taint plan apply destroy
+
 taint:
 	@start="`date`"; \
 	docker run \
@@ -24,8 +25,6 @@ taint:
 	echo "Started taint at  : $$start"; \
 	echo "Finished taint at : `date`"; \
 	echo
-
-.PHONY: init plan apply destroy
 
 init:
 	@start="`date`"; \
