@@ -20,6 +20,8 @@
 
 resource "null_resource" "deprovisioner" {
   triggers = {
+    vm_k8s_master_1_id = azurerm_virtual_machine.vm-master.id
+    jumpboxes = "${join(",", azurerm_virtual_machine.vm-jumpbox.*.id)}"
     workers = "${join(",", azurerm_virtual_machine.vm-workers.*.id)}"
   }
 
