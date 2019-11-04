@@ -10,7 +10,7 @@ ifndef ENVIRONMENT
   override ENVIRONMENT=dev
 endif
 
-.PHONY: init taint plan apply destroy
+.PHONY: init taint plan apply destroy graph
 
 taint:
 	@start="`date`"; \
@@ -68,6 +68,22 @@ apply:
 	$(IMAGE_NAME) \
 		apply \
 		-input=false \
+		/secrets/$(ENVIRONMENT)-run; \
+	echo ; \
+	echo "Started apply at  : $$start"; \
+	echo "Finished apply at : `date`"; \
+	echo
+
+graph:
+	@start="`date`"; \
+	docker run \
+	--rm -it \
+	--volume $(WORKDIR):/data \
+	--volume $(WORKDIR)/targets:/secrets \
+	--volume $(HOME)/.ssh/:/ssh/ \
+	$(IMAGE_NAME) \
+		graph \
+		-type=plan \
 		/secrets/$(ENVIRONMENT)-run; \
 	echo ; \
 	echo "Started apply at  : $$start"; \
