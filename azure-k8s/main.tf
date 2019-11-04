@@ -5,14 +5,6 @@
 # Environments:   all
 # Purpose:        Terraform main.tf module.
 #
-# Created on:     23 June 2019
-# Created by:     David Sanders
-# Creator email:  dsanderscanada@nospam-gmail.com
-#
-# -------------------------------------------------------------------
-# Modifed On   | Modified By                 | Release Notes
-# -------------------------------------------------------------------
-# 23 Jun 2019  | David Sanders               | First release.
 # -------------------------------------------------------------------
 
 provider "azurerm" {

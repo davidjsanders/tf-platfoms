@@ -5,14 +5,6 @@
 # Environments:   all
 # Purpose:        Module to define the Azure load balancer public IP.
 #
-# Created on:     08 September 2019
-# Created by:     David Sanders
-# Creator email:  dsanderscanada@nospam-gmail.com
-#
-# -------------------------------------------------------------------
-# Modifed On   | Modified By                 | Release Notes
-# -------------------------------------------------------------------
-# 08 Sep 2019  | David Sanders               | First release.
 # -------------------------------------------------------------------
 
 resource "azurerm_public_ip" "k8s-pip-lb" {

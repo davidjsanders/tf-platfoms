@@ -86,8 +86,8 @@ graph:
 		-type=plan \
 		/secrets/$(ENVIRONMENT)-run; \
 	echo ; \
-	echo "Started apply at  : $$start"; \
-	echo "Finished apply at : `date`"; \
+	echo "Started graph at  : $$start"; \
+	echo "Finished graph at : `date`"; \
 	echo
 
 destroy:
@@ -104,6 +104,6 @@ destroy:
 		-var-file=/secrets/$(ENVIRONMENT).tfvars \
 		-var-file=/secrets/credentials.secret; \
 	echo ; \
-	echo "Started apply at  : $$start"; \
-	echo "Finished apply at : `date`"; \
+	echo "Started destroy at  : $$start"; \
+	echo "Finished destroy at : `date`"; \
 	echo

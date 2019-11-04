@@ -6,14 +6,6 @@
 # Purpose:        Module to define the Azure Resource Group used to
 #                 contain all resources.
 #
-# Created on:     08 September 2019
-# Created by:     David Sanders
-# Creator email:  dsanderscanada@nospam-gmail.com
-#
-# -------------------------------------------------------------------
-# Modifed On   | Modified By                 | Release Notes
-# -------------------------------------------------------------------
-# 08 Sep 2019  | David Sanders               | First release.
 # -------------------------------------------------------------------
 
 resource "azurerm_resource_group" "k8s-rg" {

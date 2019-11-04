@@ -6,18 +6,6 @@
 # Purpose:        Module to define the Azure virtual machine for the
 #                 jumpbox.
 #
-# Created on:     10 September 2019
-# Created by:     David Sanders
-# Creator email:  dsanderscanada@nospam-gmail.com
-#
-# -------------------------------------------------------------------
-# Modifed On   | Modified By                 | Release Notes
-# -------------------------------------------------------------------
-# 10 Sep 2019  | David Sanders               | First release.
-# -------------------------------------------------------------------
-# 23 Sep 2019  | David Sanders               | Add support for
-#              |                             | variable number
-#              |                             | of workers.
 # -------------------------------------------------------------------
 
 resource "azurerm_virtual_machine" "vm-workers" {

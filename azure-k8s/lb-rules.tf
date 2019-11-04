@@ -6,19 +6,6 @@
 # Purpose:        Module to define the Azure load balancer rules
 #                 for the cluster load balancer.
 #
-# Created on:     16 September 2019
-# Created by:     David Sanders
-# Creator email:  dsanderscanada@nospam-gmail.com
-#
-# -------------------------------------------------------------------
-# Modifed On   | Modified By                 | Release Notes
-# -------------------------------------------------------------------
-# 16 Sep 2019  | David Sanders               | First release.
-# -------------------------------------------------------------------
-# 16 Sep 2019  | David Sanders               | Add 443 rule.
-# -------------------------------------------------------------------
-# 01 Oct 2019  | David Sanders               | Enable rules based on
-#              |                             | variables.
 # -------------------------------------------------------------------
 
 resource "azurerm_lb_rule" "k8s-lb-rule-80" {

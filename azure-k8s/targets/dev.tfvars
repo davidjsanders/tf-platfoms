@@ -5,10 +5,6 @@
 # Purpose:        Sets of values for the variables used in the
 #                 terraform scripts designed for use in development.
 #
-# Created on:     22 August 2018
-# Created by:     David Sanders
-# Creator email:  dsanderscanada@nospam-gmail.com
-#
 # -------------------------------------------------------------------
 
 #
@@ -51,7 +47,7 @@ workers = {
     vm-count    = 2
     prefix      = "k8s-worker"
     vm-size     = "Standard_DS3_v2"
-    image-id    = "K8S-UBUNTU-1804-19-10-3"
+    image-id    = "K8S-UBUNTU-1804-19-10-4"
     image-rg    = "RG-ENGINEERING"
     delete_os   = true
     delete_data = true
@@ -61,7 +57,7 @@ masters = {
     vm-count    = 1
     prefix      = "k8s-master"
     vm-size     = "Standard_DS2_v2"
-    image-id    = "K8S-UBUNTU-1804-19-10-3"
+    image-id    = "K8S-UBUNTU-1804-19-10-4"
     image-rg    = "RG-ENGINEERING"
     delete_os   = true
     delete_data = false
@@ -73,7 +69,7 @@ jumpboxes = {
     vm-count    = 0
     prefix      = "k8s-jumpbox"
     vm-size     = "Standard_DS1_v2"
-    image-id    = "K8S-UBUNTU-1804-19-10-3"
+    image-id    = "K8S-UBUNTU-1804-19-10-4"
     image-rg    = "RG-ENGINEERING"
     delete_os   = true
     delete_data = true

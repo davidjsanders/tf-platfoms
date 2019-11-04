@@ -7,28 +7,6 @@
 #                 to contain the actual private IP addresses of all
 #                 hosts.
 #
-# Created on:     11 September 2019
-# Created by:     David Sanders
-# Creator email:  dsanderscanada@nospam-gmail.com
-#
-# -------------------------------------------------------------------
-# Modifed On   | Modified By                 | Release Notes
-# -------------------------------------------------------------------
-# 11 Sep 2019  | David Sanders               | First release.
-# -------------------------------------------------------------------
-# 24 Sep 2019  | David Sanders               | Update to place all
-#              |                             | variables in inventory
-#              |                             | and populate through a
-#              |                             | single template_file.
-#              |                             | Change k8s advertise
-#              |                             | IP to match the IP from
-#              |                             | the NIC automatically.
-#              |                             | Alphabetize variables.
-# -------------------------------------------------------------------
-# 01 Oct 2019  | David Sanders               | Add prod_staging_flag
-#              |                             | to indicate production
-#              |                             | or staging Let's
-#              |                             | Encrypt server.
 # -------------------------------------------------------------------
 
 # Compute and interpolate the variables required for the hosts file

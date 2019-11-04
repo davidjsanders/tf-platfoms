@@ -5,17 +5,6 @@
 # Environments:   all
 # Purpose:        Module to get the persistent Azure managed disks.
 #
-# Created on:     10 September 2019
-# Created by:     David Sanders
-# Creator email:  dsanderscanada@nospam-gmail.com
-#
-# -------------------------------------------------------------------
-# Modifed On   | Modified By                 | Release Notes
-# -------------------------------------------------------------------
-# 10 Sep 2019  | David Sanders               | First release.
-# -------------------------------------------------------------------
-# 13 Oct 2019  | David Sanders               | Change jumpboxes to
-#              |                             | list of items.
 # -------------------------------------------------------------------
 
 # Compute and interpolate the variables required for the hosts file

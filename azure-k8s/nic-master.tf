@@ -6,14 +6,6 @@
 # Purpose:        Module to define the Azure network interface card
 #                 (nic) for the VM Jumpbox.
 #
-# Created on:     10 September 2019
-# Created by:     David Sanders
-# Creator email:  dsanderscanada@nospam-gmail.com
-#
-# -------------------------------------------------------------------
-# Modifed On   | Modified By                 | Release Notes
-# -------------------------------------------------------------------
-# 10 Sep 2019  | David Sanders               | First release.
 # -------------------------------------------------------------------
 
 resource "azurerm_network_interface" "k8s-nic-master" {

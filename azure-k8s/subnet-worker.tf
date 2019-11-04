@@ -6,18 +6,6 @@
 # Purpose:        Module to define the Azure sub-network used by the
 #                 worker.
 #
-# Created on:     08 September 2019
-# Created by:     David Sanders
-# Creator email:  dsanderscanada@nospam-gmail.com
-#
-# -------------------------------------------------------------------
-# Modifed On   | Modified By                 | Release Notes
-# -------------------------------------------------------------------
-# 08 Sep 2019  | David Sanders               | First release.
-# -------------------------------------------------------------------
-# 23 Sep 2019  | David Sanders               | Use cidrsubnet to
-#              |                             | generate subnet
-#              |                             | for workers.
 # -------------------------------------------------------------------
 
 resource "azurerm_subnet" "k8s-subnet-worker" {

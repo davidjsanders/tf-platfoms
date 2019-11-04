@@ -6,31 +6,6 @@
 # Purpose:        Module to define variables used in various tf
 #                 scripts. Values are provided in .tfvars files
 #
-# Created on:     08 September 2019
-# Created by:     David Sanders
-# Creator email:  dsanderscanada@nospam-gmail.com
-#
-# -------------------------------------------------------------------
-# Modifed On   | Modified By                 | Release Notes
-# -------------------------------------------------------------------
-# 08 Sep 2019  | David Sanders               | First release.
-# -------------------------------------------------------------------
-# 10 Sep 2019  | David Sanders               | Add jump pip variables.
-# -------------------------------------------------------------------
-# 19 Sep 2019  | David Sanders               | Add letsencrypt vars.
-# -------------------------------------------------------------------
-# 23 Sep 2019  | David Sanders               | Add map vars for
-#              |                             | workers.
-# -------------------------------------------------------------------
-# 25 Sep 2019  | David Sanders               | Add new kubernetes
-#              |                             | variable for kubeadm.
-#              |                             | Tidy up variables and
-#              |                             | naming conventions.
-# -------------------------------------------------------------------
-# 01 Oct 2019  | David Sanders               | Add prod_staging_flag
-#              |                             | to indicate production
-#              |                             | or staging Let's
-#              |                             | Encrypt server.
 # -------------------------------------------------------------------
 
 variable "prod_staging_flag" {
