@@ -1,6 +1,6 @@
 # -------------------------------------------------------------------
 #
-# Module:         terraform-reference-app/green
+# Module:         azure-k8s
 # Submodule:      dev.tfvars
 # Purpose:        Sets of values for the variables used in the
 #                 terraform scripts designed for use in development.
