@@ -1,6 +1,6 @@
 # -------------------------------------------------------------------
 #
-# Module:         k8s-terraform/azure-k8s-ansible
+# Module:         tf-platforms/azure-k8s-ansible
 # Submodule:      locals.tf
 # Environments:   all
 # Purpose:        Module to define local variables.

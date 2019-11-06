@@ -1,6 +1,6 @@
 # -------------------------------------------------------------------
 #
-# Module:         k8s-terraform/azure-k8s-ansible
+# Module:         tf-platforms/azure-k8s-ansible
 # Submodule:      subnet-jumpbox.tf
 # Environments:   all
 # Purpose:        Module to define the Azure sub-network used by the

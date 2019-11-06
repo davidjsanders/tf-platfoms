@@ -1,6 +1,6 @@
 # -------------------------------------------------------------------
 #
-# Module:         k8s-terraform/azure-k8s-ansible
+# Module:         tf-platforms/azure-k8s-ansible
 # Submodule:      sa-boot-daig.tf
 # Environments:   all
 # Purpose:        Module to define the Azure storage account for boot

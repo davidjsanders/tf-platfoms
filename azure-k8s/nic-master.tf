@@ -1,6 +1,6 @@
 # -------------------------------------------------------------------
 #
-# Module:         k8s-terraform/azure-k8s-ansible
+# Module:         tf-platforms/azure-k8s-ansible
 # Submodule:      nic-jumpox.tf
 # Environments:   all
 # Purpose:        Module to define the Azure network interface card

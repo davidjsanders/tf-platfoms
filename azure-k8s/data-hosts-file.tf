@@ -1,6 +1,6 @@
 # -------------------------------------------------------------------
 #
-# Module:         k8s-terraform/azure-k8s-ansible
+# Module:         tf-platforms/azure-k8s-ansible
 # Submodule:      data-hosts-file.tf
 # Environments:   all
 # Purpose:        Module to get the persistent Azure managed disks.

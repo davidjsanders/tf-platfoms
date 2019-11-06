@@ -1,6 +1,6 @@
 # -------------------------------------------------------------------
 #
-# Module:         k8s-terraform/azure-k8s-ansible
+# Module:         tf-platforms/azure-k8s-ansible
 # Submodule:      nsg-allow-22-workers.tf
 # Environments:   all
 # Purpose:        Module to define the Azure network security group
