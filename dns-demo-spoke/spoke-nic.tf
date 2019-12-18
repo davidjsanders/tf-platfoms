@@ -7,7 +7,7 @@ resource "azurerm_network_interface" "dns-demo-nic" {
     count.index
   )
 
-  resource_group_name = azurerm_resource_group.dns-demo-rg.name
+  resource_group_name = azurerm_resource_group.dns-demo-spoke-rg.name
 
   # internal_dns_name_label = "davidtest.internal.cloudapp.net"
 

@@ -13,7 +13,7 @@ resource "azurerm_virtual_machine" "dns-demo-vm" {
   )
 
   network_interface_ids = [azurerm_network_interface.dns-demo-nic.*.id[count.index]]
-  resource_group_name   = azurerm_resource_group.dns-demo-rg.name
+  resource_group_name   = azurerm_resource_group.dns-demo-spoke-rg.name
   vm_size               = "Standard_DS1_v2"
 
   boot_diagnostics {
