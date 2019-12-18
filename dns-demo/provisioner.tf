@@ -1,3 +1,8 @@
+# TODO: Add the curl to the API on the remote to get
+#       the DNS suffix for the VNET on creation; otherwise
+#       code fails first time it's run (because you can't
+#       know an env. var. before the resource is created!)
+
 resource "null_resource" "bastion-provisioner" {
   triggers = {
     bastion-vm = azurerm_virtual_machine.dns-demo-bastion.id
@@ -35,6 +40,11 @@ resource "null_resource" "bastion-provisioner" {
     destination = "/tmp/resolv.conf"
   }
 
+  # provisioner "local-exec" {
+  #   command = "echo -n 'search ' | tee /tmp/dns-suffix.tmp; az network nic show --ids ${azurerm_network_interface.dns-demo-bastion-nic.id} --resource-group ${azurerm_resource_group.dns-demo-rg.name} | jq -r '.dnsSettings.internalDomainNameSuffix' | tee -a /tmp/dns-suffix.tmp"
+  #   interpreter = ["/usr/local/bin/bash", "-c"]
+  # }
+
   provisioner "remote-exec" {
     inline = [
       "touch ~/test.txt",
@@ -50,17 +60,21 @@ resource "null_resource" "bastion-provisioner" {
       "echo 'Done.'"
     ]
   }
+# To be fixed
+#      "printf \"\nsearch ${var.dns-suffix}\" | sudo tee -a /etc/resolv.conf",
 }
 
 resource "null_resource" "first-vm-provisioner" {
+  count = var.vm-count
+
   triggers = {
     bastion-provisioner = null_resource.bastion-provisioner.id,
-    first-vm   = azurerm_virtual_machine.dns-demo-vm.*.id[0],
+    first-vm   = azurerm_virtual_machine.dns-demo-vm.*.id[count.index],
     bastion-vm = azurerm_virtual_machine.dns-demo-bastion.id
   }
 
   connection {
-    host         = azurerm_network_interface.dns-demo-nic.*.private_ip_address[0]
+    host         = azurerm_network_interface.dns-demo-nic.*.private_ip_address[count.index]
     bastion_host = azurerm_public_ip.dns-demo-pip.ip_address
     type         = "ssh"
     user         = "superuser"
@@ -84,4 +98,6 @@ resource "null_resource" "first-vm-provisioner" {
       "echo 'Done.'"
     ]
   }
+# To be fixed
+#      "printf \"\nsearch ${var.dns-suffix}\" | sudo tee -a /etc/resolv.conf",
 }

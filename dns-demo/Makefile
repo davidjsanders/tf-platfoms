@@ -52,7 +52,8 @@ plan:
 		-input=false \
 		-out=/secrets/$(ENVIRONMENT)-run \
 		-var-file=/secrets/$(ENVIRONMENT).tfvars \
-		-var-file=/secrets/credentials.secret; \
+		-var-file=/secrets/credentials.secret\
+		${EXTRA_ARGS}; \
 	echo ; \
 	echo "Started plan at  : $$start"; \
 	echo "Finished plan at : `date`"; \

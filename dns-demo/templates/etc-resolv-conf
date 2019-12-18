@@ -16,4 +16,4 @@
 
 nameserver 127.0.0.53
 options edns0
-search reddog.microsoft.com
+#search reddog.microsoft.com
