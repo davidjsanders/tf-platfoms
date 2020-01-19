@@ -1,6 +1,11 @@
 resource "azurerm_virtual_machine" "dns-demo-vm" {
   count = var.vm-count
 
+  # depends_on = [
+  #   azurerm_virtual_network_peering.spoke-to-hub-peering,
+  #   azurerm_virtual_network_peering.hub-to-spoke-peering,
+  # ]
+
   availability_set_id              = ""
   delete_os_disk_on_termination    = "true"
   delete_data_disks_on_termination = "true"
@@ -17,7 +22,7 @@ resource "azurerm_virtual_machine" "dns-demo-vm" {
   vm_size               = "Standard_DS1_v2"
 
   boot_diagnostics {
-    storage_uri = azurerm_storage_account.dns-demo-sa.primary_blob_endpoint
+    storage_uri = data.azurerm_storage_account.dns-demo-sa.primary_blob_endpoint
     enabled     = true
   }
 

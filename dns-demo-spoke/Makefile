@@ -20,7 +20,7 @@ taint:
 		--volume $(WORKDIR)/targets:/secrets \
 		--volume $(HOME)/.ssh/:/ssh/ \
 		$(IMAGE_NAME) \
-			taint null_resource.provisioner ; \
+			taint $(EXTRA_ARGS); \
 	echo ; \
 	echo "Started taint at  : $$start"; \
 	echo "Finished taint at : `date`"; \

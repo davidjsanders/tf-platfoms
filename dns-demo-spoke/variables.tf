@@ -1,4 +1,5 @@
 variable "vm-count" { default = 3 }
+variable "dns-suffix" { default = "" }
 
 #
 # Service Principal Variables
